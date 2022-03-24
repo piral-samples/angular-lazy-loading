@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 import { PiletApi } from "sample-piral";
 
 export function setup(app: PiletApi) {
-  const AngularSample = React.lazy(() => System.import(`${app.meta.basePath}angular-page.js`));
+  const AngularSample = React.lazy(() =>
+    System.import("@angular/compiler@13.3.0").then(() =>
+      System.import(`${app.meta.basePath}angular-page.js`)
+    )
+  );
 
   app.registerPage("/sample", AngularSample);
 
