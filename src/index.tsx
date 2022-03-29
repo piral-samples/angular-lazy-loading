@@ -13,3 +13,7 @@ export function setup(app: PiletApi) {
 
   app.registerMenu(() => <Link to="/sample">Sample</Link>);
 }
+
+export function teardown(app: PiletApi) {
+  System.delete(`${app.meta.basePath}angular-page.js`);
+}
