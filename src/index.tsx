@@ -4,7 +4,7 @@ import { PiletApi } from "sample-piral";
 
 export function setup(app: PiletApi) {
   const AngularSample = React.lazy(() =>
-    System.import("@angular/compiler@13.3.0").then(() =>
+    System.import("@angular/compiler@13.3.1").then(() =>
       System.import(`${app.meta.basePath}angular-page.js`)
     )
   );
@@ -12,8 +12,4 @@ export function setup(app: PiletApi) {
   app.registerPage("/sample", AngularSample);
 
   app.registerMenu(() => <Link to="/sample">Sample</Link>);
-}
-
-export function teardown(app: PiletApi) {
-  System.delete(`${app.meta.basePath}angular-page.js`);
 }
