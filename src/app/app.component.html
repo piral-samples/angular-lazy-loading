@@ -2,7 +2,10 @@
   <div class="info-text">Some NG Page!</div>
 
   <div>
-    <p>Counter: {{ counter }}!</p>
+    <h1>
+      {{ foo.params.count }}s on page
+    </h1>
+    <extension-component name="foo" [params]="{ title: counter }"></extension-component>
 
     <button (click)="increment()">Increment</button>
 

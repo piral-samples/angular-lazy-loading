@@ -16,7 +16,14 @@ const AngularWrapper: React.FC<PageComponentProps> = ({ piral }) => {
     fresh = false;
   }
 
-  return <piral.Extension name="angular-page" />;
+  const [state, setState] = React.useState(0);
+
+  React.useEffect(() => {
+    const tid = window.setInterval(() => setState((c) => c + 1), 1000);
+    return () => window.clearInterval(tid);
+  }, []);
+
+  return <piral.Extension name="angular-page" params={{ count: state }} />;
 };
 
 export default AngularWrapper;
