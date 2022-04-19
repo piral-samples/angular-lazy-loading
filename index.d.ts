@@ -226,8 +226,9 @@ declare module "sample-piral" {
      * @param name The name of the modal to register.
      * @param Component The component to render the page.
      * @param defaults Optionally, sets the default values for the inserted options.
+     * @param layout Optionally, sets the layout options for the dialog wrapper.
      */
-    registerModal<T>(name: T extends string ? T : string, Component: AnyComponent<ModalComponentProps<T>>, defaults?: ModalOptions<T>): RegistrationDisposer;
+    registerModal<T>(name: T extends string ? T : string, Component: AnyComponent<ModalComponentProps<T>>, defaults?: ModalOptions<T>, layout?: ModalLayoutOptions): RegistrationDisposer;
     /**
      * Unregisters a modal by its name.
      * @param name The name that was previously registered.
@@ -465,6 +466,11 @@ declare module "sample-piral" {
   export type ModalOptions<T> = T extends keyof PiralModalsMap ? PiralModalsMap[T] & BaseModalOptions : T extends string ? BaseModalOptions : T;
 
   export type ModalComponentProps<T> = BaseComponentProps & BareModalComponentProps<ModalOptions<T>>;
+
+  /**
+   * The options provided for the dialog layout.
+   */
+  export interface ModalLayoutOptions {}
 
   export interface FeedResolver<TData> {
     (): Promise<TData>;
@@ -1755,6 +1761,7 @@ declare module "sample-piral" {
     name: string;
     component: WrappedComponent<ModalComponentProps<any>>;
     defaults: any;
+    layout: ModalLayoutOptions;
   }
 
   export interface ConnectorDetails<TData, TItem, TReducers extends FeedConnectorReducers<TData> = {}> extends FeedConnectorOptions<TData, TItem, TReducers> {
@@ -1989,7 +1996,10 @@ declare module "sample-piral" {
     close(): void;
   }
 
-  export interface ModalsDialogProps extends OpenModalDialog {}
+  export interface ModalsDialogProps extends OpenModalDialog {
+    layout: ModalLayoutOptions;
+    defaults: any;
+  }
 
   export interface SearchResultProps {}
 
